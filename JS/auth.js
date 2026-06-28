@@ -1,8 +1,4 @@
-// auth.js - handles register and login for AssignFlow
-// Users are saved in localStorage as a simple "database" since this
-// is a front-end only student project (no real backend/server).
 
-// grab the saved users list, or start a new empty one
 function getUsers() {
   var data = localStorage.getItem("assignflow_users");
   if (data) {
@@ -15,7 +11,7 @@ function saveUsers(users) {
   localStorage.setItem("assignflow_users", JSON.stringify(users));
 }
 
-// Use case: Student Registration
+
 var registerForm = document.getElementById("register-form");
 if (registerForm) {
   registerForm.addEventListener("submit", function (e) {
@@ -38,7 +34,7 @@ if (registerForm) {
 
     var users = getUsers();
 
-    // check if the email is already used
+    
     var alreadyExists = users.some(function (user) {
       return user.email === email;
     });
@@ -66,7 +62,7 @@ if (registerForm) {
   });
 }
 
-// Use case: Student Login
+
 var loginForm = document.getElementById("login-form");
 if (loginForm) {
   loginForm.addEventListener("submit", function (e) {
@@ -88,7 +84,7 @@ if (loginForm) {
       return;
     }
 
-    // store the logged-in user so the dashboard knows who is signed in
+    
     var sessionData = JSON.stringify({
       fullname: matchedUser.fullname,
       email: matchedUser.email,
@@ -96,10 +92,10 @@ if (loginForm) {
     });
 
     if (rememberMe) {
-      // stays logged in even after closing the browser
+      
       localStorage.setItem("assignflow_session", sessionData);
     } else {
-      // only lasts for this browser tab/session
+     
       sessionStorage.setItem("assignflow_session", sessionData);
     }
 

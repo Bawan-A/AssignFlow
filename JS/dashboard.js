@@ -1,7 +1,4 @@
-// dashboard.js - handles the task list page for AssignFlow
 
-// Use case: Session Check
-// if nobody is logged in, send them back to the login page
 var session =
   localStorage.getItem("assignflow_session") ||
   sessionStorage.getItem("assignflow_session");
@@ -26,8 +23,7 @@ logoutLink.addEventListener("click", function (e) {
   window.location.href = "auth.html";
 });
 
-// tasks are saved separately for each user email, so two students
-// using the same browser don't see each other's tasks
+
 var tasksKey = "assignflow_tasks_" + (currentUser ? currentUser.email : "guest");
 
 function getTasks() {
@@ -46,7 +42,7 @@ var taskListEl = document.getElementById("task-list");
 var emptyMessageEl = document.getElementById("empty-message");
 var filterSelect = document.getElementById("filter-select");
 
-// Use case: View / Filter Tasks
+
 function renderTasks() {
   var tasks = getTasks();
   var filter = filterSelect.value;
@@ -100,7 +96,7 @@ function renderTasks() {
   });
 }
 
-// Use case: Add Task
+
 var addTaskForm = document.getElementById("add-task-form");
 addTaskForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -116,7 +112,7 @@ addTaskForm.addEventListener("submit", function (e) {
   var tasks = getTasks();
 
   tasks.push({
-    id: Date.now(), // good enough way to get a unique id for a student project
+    id: Date.now(), 
     title: title,
     due: due,
     priority: priority,
@@ -129,8 +125,7 @@ addTaskForm.addEventListener("submit", function (e) {
   renderTasks();
 });
 
-// Use case: Complete / Delete Task
-// using one listener on the list instead of one per button
+
 taskListEl.addEventListener("click", function (e) {
   var target = e.target;
   var id = Number(target.getAttribute("data-id"));
